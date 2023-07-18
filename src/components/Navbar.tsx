@@ -8,6 +8,7 @@ import NewIcon from "./ui/icons/NewIcon";
 import NewFillIcon from "./ui/icons/NewFillIcon";
 import { usePathname } from "next/navigation";
 import ColorButton from "./ui/ColorButton";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const menu = [
   { href: "/", icon: <HomeICon />, clickedIcon: <HomeFillIcon /> },
@@ -17,9 +18,13 @@ const menu = [
 
 export default function Navbar() {
   const pathName = usePathname();
+  const { data: session } = useSession();
+
   return (
     <div className="flex justify-between items-center px-6">
-      <Link href="/"><h1 className="text-3xl font-bold">mInstagram</h1></Link>
+      <Link href="/">
+        <h1 className="text-3xl font-bold">mInstagram</h1>
+      </Link>
       <nav>
         <ul className="flex gap-4 items-center p-4">
           {menu.map((item) => (
@@ -29,7 +34,11 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <ColorButton text="Sign in" onClick={() => {}} />
+          {session ? (
+            <ColorButton text="Sign out" onClick={() => signOut()} />
+          ) : (
+            <ColorButton text="Sign in" onClick={() => signIn()} />
+          )}
         </ul>
       </nav>
     </div>
