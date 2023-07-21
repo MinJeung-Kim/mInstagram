@@ -12,7 +12,7 @@ export default function Avatar({
   return (
     <div className={getContainerStyle(size, highlight)}>
       <img
-        className={`bg-white rounded-full ${getImageSizeStyle(size)}`}
+        className={`bg-white object-cover rounded-full ${getImageSizeStyle(size)}`}
         alt="user profile"
         src={image ?? undefined}
         // 외부 이미지 링크 사용시 x박스 방지
