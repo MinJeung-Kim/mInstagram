@@ -1,4 +1,4 @@
-import {Rule} from 'sanity'
+import { Rule } from "sanity"
 
 export default {
   title: 'Post',
@@ -11,7 +11,11 @@ export default {
       type: 'reference',
       to: [{type: 'user'}],
     },
-    {title: 'Photo', name: 'photo', type: 'image'},
+    {
+      title: 'Photo',
+      name: 'photo',
+      type: 'image',
+    },
     {
       title: 'Likes',
       name: 'likes',
@@ -22,7 +26,7 @@ export default {
           to: [{type: 'user'}],
         },
       ],
-      validation: (Rule: Rule) => Rule.unique(),
+      validation: (Rule:Rule) => Rule.unique(),
     },
     {
       title: 'Comments',
@@ -30,12 +34,21 @@ export default {
       type: 'array',
       of: [
         {
-          title: 'Comments',
-          name: 'comments',
+          title: 'Comment',
+          name: 'comment',
           type: 'document',
           fields: [
-            {title: 'Author', name: 'author', type: 'reference', to: [{type: 'user'}]},
-            {title: 'Comments', name: 'comments', type: 'string'},
+            {
+              title: 'Author',
+              name: 'author',
+              type: 'reference',
+              to: [{type: 'user'}],
+            },
+            {
+              title: 'Comment',
+              name: 'comment',
+              type: 'string',
+            },
           ],
         },
       ],
@@ -43,14 +56,13 @@ export default {
   ],
   preview: {
     select: {
-      // comments 배열안에 0번째 item
-      title: 'comments.0.comments',
+      title: 'comments.0.comment',
       authorName: 'author.name',
       authorUsername: 'author.username',
       media: 'photo',
     },
-    prepare(selecteion: any) {
-      const {title, authorName, authorUsername, media} = selecteion
+    prepare(selection:any) {
+      const {title, authorName, authorUsername, media} = selection
       return {
         title,
         subtitle: `by ${authorName} (${authorUsername})`,
