@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileUSer } from "@/model/user";
+import { SearchUser } from "@/model/user";
 import { FormEvent, useState } from "react";
 import useSWR from "swr";
 import GridSpinner from "./ui/GridSpinner";
@@ -17,7 +17,7 @@ export default function UserSearch() {
     data: users,
     isLoading,
     error,
-  } = useSWR<ProfileUSer[]>(`/api/search/${debouncedKeyword}`);
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
   const onSubmit = (e: FormEvent) => {
     // keyword가 변경될때마다 useSWR이 알아서 데이터를 받아와서 업데이트 해줌.
