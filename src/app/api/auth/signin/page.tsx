@@ -1,8 +1,14 @@
-import Signin from '@/components/Signin'; 
-import { getServerSession } from 'next-auth';
-import { getProviders } from 'next-auth/react';
-import { redirect } from 'next/navigation';
-import { authOptions } from '../[...nextauth]/route';
+import Signin from "@/components/Signin";
+import { getServerSession } from "next-auth";
+import { getProviders } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { authOptions } from "../[...nextauth]/route";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Signin",
+  description: "Sinup or Login to mInstagram",
+};
 
 type Props = {
   searchParams: {
@@ -16,14 +22,14 @@ export default async function SignPage({
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect('/');
+    redirect("/");
   }
 
   const providers = (await getProviders()) ?? {};
 
   return (
-    <section className='flex justify-center mt-24'>
-      <Signin providers={providers} callbackUrl={callbackUrl ?? '/'} />
+    <section className="flex justify-center mt-24">
+      <Signin providers={providers} callbackUrl={callbackUrl ?? "/"} />
     </section>
   );
 }
