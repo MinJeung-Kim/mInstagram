@@ -1,5 +1,9 @@
-import { BsBookmark } from "react-icons/bs";
+import { RiBookmarkLine } from "react-icons/ri";
 
-export default function BookmarkIcon() {
-  return <BsBookmark className="w-6 h-6" />;
+type Prpos = {
+  className?: string;
+};
+
+export default function BookmarkIcon({ className }: Prpos) {
+  return <RiBookmarkLine className={className || "w-6 h-6"} />;
 }
