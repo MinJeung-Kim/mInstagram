@@ -4,6 +4,7 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { dislikePost, likePost } from "@/service/posts";
 
 export async function PUT(req: NextRequest) {
+  // 현재 로그인한 사용자 확인
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
