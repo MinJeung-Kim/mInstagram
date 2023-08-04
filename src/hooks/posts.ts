@@ -16,13 +16,16 @@ async function addComment(id: string, comment: string) {
   }).then((res) => res.json());
 }
 
-export default function usePosts() {
+// 사용하는 곳에서 cacheKey를 받아옴
+export default function usePosts(cacheKey: string = "/api/posts") {
+  console.log(cacheKey);
+
   const {
     data: posts,
     isLoading,
     error,
     mutate,
-  } = useSWR<SimplePost[]>("/api/posts");
+  } = useSWR<SimplePost[]>(cacheKey);
 
   const setLike = useCallback(
     (post: SimplePost, username: string, like: boolean) => {

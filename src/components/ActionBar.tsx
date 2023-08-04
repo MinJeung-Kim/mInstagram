@@ -13,17 +13,23 @@ type Props = {
   post: SimplePost;
   children?: React.ReactNode;
   onComment: (comment: Comment) => void;
+  cacheKey: string;
 };
 
-export default function ActionBar({ post, children, onComment }: Props) {
+export default function ActionBar({
+  post,
+  children,
+  onComment,
+  cacheKey,
+}: Props) {
   const { id, createdAt, likes } = post;
   const { user, setBookmark } = useMe();
-  const { setLike } = usePosts();
+  const { setLike } = usePosts(cacheKey);
 
   const liked = user ? likes.includes(user.username) : false;
   const bookmarked = user?.bookmarks.includes(id) ?? false;
 
-  const handleListe = (like: boolean) => {
+  const handleLike = (like: boolean) => {
     user && setLike(post, user.username, like);
   };
 
@@ -40,7 +46,7 @@ export default function ActionBar({ post, children, onComment }: Props) {
       <div className="flex justify-between my-2 px-4">
         <ToggleButton
           toggled={liked}
-          onToggle={handleListe}
+          onToggle={handleLike}
           onIcon={<HeartFillIcon />}
           offIcon={<HeartIcon />}
         />
