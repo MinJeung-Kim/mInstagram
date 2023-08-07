@@ -1,6 +1,7 @@
 import { Comment, SimplePost } from "@/model/post";
 import useSWR from "swr";
 import { useCallback } from "react";
+import { useCacheKeys } from "@/context/CacheKeysContext";
 
 async function updateLike(id: string, like: boolean) {
   return fetch("/api/likes", {
@@ -16,16 +17,15 @@ async function addComment(id: string, comment: string) {
   }).then((res) => res.json());
 }
 
-// 사용하는 곳에서 cacheKey를 받아옴
-export default function usePosts(cacheKey: string = "/api/posts") {
-  console.log(cacheKey);
+export default function usePosts() {
+  const cacheKeys = useCacheKeys();
 
   const {
     data: posts,
     isLoading,
     error,
     mutate,
-  } = useSWR<SimplePost[]>(cacheKey);
+  } = useSWR<SimplePost[]>(cacheKeys.postsKey);
 
   const setLike = useCallback(
     (post: SimplePost, username: string, like: boolean) => {

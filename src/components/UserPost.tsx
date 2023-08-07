@@ -6,6 +6,7 @@ import PostIcon from "./ui/icons/PostIcon";
 import BookmarkIcon from "./ui/icons/BookmarkIcon";
 import HeartIcon from "./ui/icons/HeartIcon";
 import PostGrid from "./PostGrid";
+import { CacheKeysContext } from "@/context/CacheKeysContext";
 
 type Props = { user: ProfileUser };
 
@@ -15,9 +16,6 @@ const tabs = [
   { type: "liked", icon: <HeartIcon className="w-3 h-3" /> },
 ];
 export default function UserPost({ user: { username } }: Props) {
-  // 1. /api/user/${username}/posts
-  // 2. /api/user/${username}/liked
-  // 3. /api/user/${username}/bookmarks
   const [query, setQuery] = useState(tabs[0].type);
 
   return (
@@ -36,7 +34,11 @@ export default function UserPost({ user: { username } }: Props) {
           </li>
         ))}
       </ul>
-      <PostGrid username={username} query={query} />
+      <CacheKeysContext.Provider
+        value={{ postsKey: `/api/users/${username}/${query}` }}
+      >
+        <PostGrid />
+      </CacheKeysContext.Provider>
     </section>
   );
 }
