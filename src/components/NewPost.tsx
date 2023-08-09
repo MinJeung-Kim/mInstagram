@@ -1,18 +1,25 @@
 "use client";
 import { AuthUser } from "@/model/user";
+import Image from "next/image";
+import { ChangeEvent, DragEvent, useState } from "react";
 import PostUserAvatar from "./PostUserAvatar";
-import FilesIcon from "./ui/icons/FilesIcon";
 import Button from "./ui/Button";
-import { DragEvent, useState } from "react";
+import FilesIcon from "./ui/icons/FilesIcon";
 
 type Props = {
   user: AuthUser;
 };
-
 export default function NewPost({ user: { username, image } }: Props) {
-  // drag가 되고 있는지(drag 상태)
   const [dragging, setDragging] = useState(false);
-  const handleChange = () => {};
+  const [file, setFile] = useState<File>();
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const files = e.target?.files;
+    if (files && files[0]) {
+      setFile(files[0]);
+      console.log(files[0]);
+    }
+  };
   const handleDrag = (e: DragEvent) => {
     if (e.type === "dragenter") {
       setDragging(true);
@@ -20,41 +27,71 @@ export default function NewPost({ user: { username, image } }: Props) {
       setDragging(false);
     }
   };
-
-  const handleDragOver = () => {};
-
-  const handleDrop = () => {};
+  const handleDragOver = (e: DragEvent) => {
+    e.preventDefault();
+  };
+  const handleDrop = (e: DragEvent) => {
+    e.preventDefault();
+    setDragging(false);
+    const files = e.dataTransfer?.files;
+    if (files && files[0]) {
+      setFile(files[0]);
+      console.log(files[0]);
+    }
+  };
 
   return (
-    <section>
+    <section className="w-full max-w-xl flex flex-col items-center mt-6">
       <PostUserAvatar username={username} image={image ?? ""} />
-      <form action="">
+      <form className="w-full flex flex-col mt-2">
         <input
           className="hidden"
           name="input"
           id="input-upload"
           type="file"
-          accept="imate/*"
+          accept="image/*"
           onChange={handleChange}
         />
         <label
+          className={`w-full h-60 flex flex-col items-center justify-center ${
+            !file && "border-2 border-sky-500 border-dashed"
+          }`}
           htmlFor="input-upload"
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDragOver}
-          onDrag={handleDrop}
+          onDrop={handleDrop}
         >
-          <FilesIcon />
-          <p>Drag and Drop your image here or click</p>
-          <textarea
-            name="text"
-            id="input-text"
-            required
-            rows={10}
-            placeholder={"Write a caption"}
-          />
-          <Button text="Publish" onClick={() => {}} />
+          {dragging && (
+            <div className="absolute inset-0 z-10 bg-sky-500/20 pointer-events-none" />
+          )}
+          {!file && (
+            <div className="flex flex-col items-center pointer-events-none">
+              <FilesIcon />
+              <p>Drag and Drop your image here or click</p>
+            </div>
+          )}
+          {file && (
+            <div className="relative w-full aspect-square">
+              <Image
+                className="object-cover"
+                src={URL.createObjectURL(file)}
+                alt="local file"
+                fill
+                sizes="650px"
+              />
+            </div>
+          )}
         </label>
+        <textarea
+          className="outline-none text-lg border border-neutral-300"
+          name="text"
+          id="input-text"
+          required
+          rows={10}
+          placeholder={"Write a caption..."}
+        />
+        <Button text="Publish" onClick={() => {}} />
       </form>
     </section>
   );
