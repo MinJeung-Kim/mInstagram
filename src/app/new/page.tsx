@@ -13,7 +13,7 @@ export default async function NewPostPage() {
   // ServerSession을 사용할때는 꼭 옵션을 전달!!
   const session = await getServerSession(authOptions);
   if (!session?.user) {
-    redirect("/auth/signin");
+    redirect("/api/auth/signin");
   }
   return <NewPost user={session.user} />;
 }

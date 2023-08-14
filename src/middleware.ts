@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
     }
     // 특정한 페이지를 전달 받는다면
     const { pathname, search, origin, basePath } = req.nextUrl;
-    const signInUrl = new URL(`${basePath}/auth/signin`, origin);
+    const signInUrl = new URL(`${basePath}/api/auth/signin`, origin);
     // 현재 사용자가 원하는 URL 지정
     signInUrl.searchParams.append(
       "callbackUrl",

@@ -25,7 +25,7 @@ export default async function SignPage({
     redirect("/");
   }
 
-  const providers = (await getProviders()) ?? {};
+  const providers = (await getProviders()) ?? {}; 
 
   return (
     <section className="flex justify-center mt-24">
