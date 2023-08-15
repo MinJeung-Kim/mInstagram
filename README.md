@@ -12,8 +12,7 @@
 ## 배포주소
 > [https://m-instagram.vercel.app/](https://m-instagram.vercel.app/)
 ## 프로젝트 소개
-> 인스타그램 클론코딩
-> serverless
+> 인스타그램 클론코딩 
 ## 시작 가이드
 ### Requirements
 For building and running the application you need:
