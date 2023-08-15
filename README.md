@@ -43,7 +43,115 @@ ___
 
 ___
 ## 주요기능 🤹
-
+https://github.com/MinJeung-Kim/mInstagram/wiki
 ___
 ## 아키텍쳐
 ### 디렉토리 구조
+```
+📦src
+ ┣ 📂app
+ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┣ 📂signin
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┗ 📂[...nextauth]
+ ┃ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂bookmarks
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂comments
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂follow
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂likes
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂me
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂posts
+ ┃ ┃ ┃ ┣ 📂[id]
+ ┃ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂search
+ ┃ ┃ ┃ ┣ 📂[keyword]
+ ┃ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┗ 📂users
+ ┃ ┃ ┃ ┗ 📂[...slug]
+ ┃ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┣ 📂new
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂search
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂user
+ ┃ ┃ ┗ 📂[username]
+ ┃ ┃ ┃ ┣ 📜not-found.tsx
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📜favicon.ico
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┗ 📜page.tsx
+ ┣ 📂components
+ ┃ ┣ 📂ui
+ ┃ ┃ ┣ 📂icons
+ ┃ ┃ ┃ ┣ 📜BookmarkFillIcon.tsx
+ ┃ ┃ ┃ ┣ 📜BookmarkIcon.tsx
+ ┃ ┃ ┃ ┣ 📜CloseIcon.tsx
+ ┃ ┃ ┃ ┣ 📜FilesIcon.tsx
+ ┃ ┃ ┃ ┣ 📜HeartFillIcon.tsx
+ ┃ ┃ ┃ ┣ 📜HeartIcon.tsx
+ ┃ ┃ ┃ ┣ 📜HomeFillIcon.tsx
+ ┃ ┃ ┃ ┣ 📜HomeICon.tsx
+ ┃ ┃ ┃ ┣ 📜NewFillIcon.tsx
+ ┃ ┃ ┃ ┣ 📜NewIcon.tsx
+ ┃ ┃ ┃ ┣ 📜PostIcon.tsx
+ ┃ ┃ ┃ ┣ 📜SearchFillIcon.tsx
+ ┃ ┃ ┃ ┣ 📜SearchIcon.tsx
+ ┃ ┃ ┃ ┗ 📜SmileIcon.tsx
+ ┃ ┃ ┣ 📜Button.tsx
+ ┃ ┃ ┣ 📜ColorButton.tsx
+ ┃ ┃ ┣ 📜GridSpinner.tsx
+ ┃ ┃ ┣ 📜ModalPotal.tsx
+ ┃ ┃ ┣ 📜ScrollableBar.tsx
+ ┃ ┃ ┗ 📜ToggleButton.tsx
+ ┃ ┣ 📜ActionBar.tsx
+ ┃ ┣ 📜Avatar.tsx
+ ┃ ┣ 📜CommentForm.tsx
+ ┃ ┣ 📜FollowButton.tsx
+ ┃ ┣ 📜FollowingBar.tsx
+ ┃ ┣ 📜Navbar.tsx
+ ┃ ┣ 📜NewPost.tsx
+ ┃ ┣ 📜PostDetail.tsx
+ ┃ ┣ 📜PostGrid.tsx
+ ┃ ┣ 📜PostGridCard.tsx
+ ┃ ┣ 📜PostList.tsx
+ ┃ ┣ 📜PostListCard.tsx
+ ┃ ┣ 📜PostModal.tsx
+ ┃ ┣ 📜PostUserAvatar.tsx
+ ┃ ┣ 📜SideBar.tsx
+ ┃ ┣ 📜Signin.tsx
+ ┃ ┣ 📜UserCard.tsx
+ ┃ ┣ 📜UserPosts.tsx
+ ┃ ┣ 📜UserProfile.tsx
+ ┃ ┗ 📜UserSearch.tsx
+ ┣ 📂context
+ ┃ ┣ 📜AuthContext.tsx
+ ┃ ┣ 📜CacheKeysContext.tsx
+ ┃ ┗ 📜SWRConfigContext.tsx
+ ┣ 📂hooks
+ ┃ ┣ 📜debounce.ts
+ ┃ ┣ 📜me.ts
+ ┃ ┣ 📜post.ts
+ ┃ ┗ 📜posts.ts
+ ┣ 📂model
+ ┃ ┣ 📜post.ts
+ ┃ ┗ 📜user.ts
+ ┣ 📂service
+ ┃ ┣ 📜posts.ts
+ ┃ ┣ 📜sanity.ts
+ ┃ ┗ 📜user.ts
+ ┣ 📂types
+ ┃ ┗ 📜next-auth.d.ts
+ ┣ 📂util
+ ┃ ┣ 📜date.ts
+ ┃ ┗ 📜session.ts
+ ┗ 📜middleware.ts
+```
