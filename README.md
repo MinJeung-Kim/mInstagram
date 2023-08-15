@@ -16,10 +16,10 @@
 ## 시작 가이드
 ### Requirements
 For building and running the application you need:
-- Node.js 18.16.0
-- Npm 9.5.1
-- NextJS 13.4.9
-- ReactJS 18.2.15
+- [Node.js 18.16.0](https://nodejs.org/ca/blog/release/v18.16.0)
+- [Npm 9.5.1](https://www.npmjs.com/package/npm/v/9.5.1)
+- [NextJS 13.4.9](https://nextjs.org/)
+- [ReactJS 18.2.15](https://react.dev/)
 ### Installation
 ```shell
 $ git clone https://github.com/MinJeung-Kim/mInstagram.git
