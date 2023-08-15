@@ -1,4 +1,4 @@
-import UserPost from "@/components/UserPost";
+import UserPosts from "@/components/UserPosts";
 import UserProfile from "@/components/UserProfile";
 import { getUserForProfile } from "@/service/user";
 import { Metadata } from "next";
@@ -22,7 +22,7 @@ export default async function UserPage({ params: { username } }: Props) {
       {/* 상단 : 사용자의 프로필 이미지와 정보(username, name, 숫자) */}
       <UserProfile user={user} />
       {/* 하단 : 3개의 탭 (posts, liked, bookmarks) */}
-      <UserPost user={user} />
+      <UserPosts user={user} />
     </section>
   );
 }
